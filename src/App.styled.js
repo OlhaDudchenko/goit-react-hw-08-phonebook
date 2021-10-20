@@ -8,7 +8,7 @@ export const AppWrapper = styled.div`
   font-family: "Dancing Script", cursive;
   background-attachment: fixed;
   background-image: url("${(props) => props.theme.src}");
-  /* background-repeat: ${(props) => props.theme.BackgroundRepeat}; */
+  background-repeat: ${(props) => props.theme.BackgroundRepeat};
   /* background-position: ${(props) => props.theme.BackgroundPosition}; */
   background-size: ${(props) => props.theme.BackgroundSize};
   background-color: ${(props) => props.theme.colors.BackgroundColor};
