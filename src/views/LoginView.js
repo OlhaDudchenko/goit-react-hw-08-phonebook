@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { authOperations, authSelectors } from "../redux/authorization";
+import { useDispatch } from "react-redux";
+import { authOperations } from "../redux/authorization";
 import { Section } from "../components/Section";
 import {
   Input,
@@ -10,30 +10,17 @@ import { LoginViewBack, Form } from "./Login.styled";
 
 export default function LoginView() {
   const dispatch = useDispatch();
-  const isLogged = useSelector(authSelectors.getLogged);
+  const [user, setUser] = useState({ email: "", password: "" });
+  const { email, password } = user;
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleChange = (event) => {
-    const {
-      target: { name, value },
-    } = event;
-    switch (name) {
-      case "email":
-        return setEmail(value);
-      case "password":
-        return setPassword(value);
-      default:
-        return;
-    }
+  const handleChange = ({ target: { name, value } }) => {
+    setUser((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(authOperations.login({ email, password }));
-    setEmail("");
-    setPassword("");
+    setUser({ email: "", password: "" });
   };
 
   return (
