@@ -8,6 +8,8 @@ import { fetchCurrentUser } from "./redux/authorization/auth-operations";
 import { PrivateRoute } from "./components/Routs/PrivetRouts";
 import { PublicRoute } from "./components/Routs/PublicRouts";
 import { authSelectors } from "./redux/authorization";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const HomeView = lazy(() =>
   import("./views/HomeView" /* webpackChunkName: "home-view" */)
@@ -56,6 +58,7 @@ function App() {
           </Switch>
         </>
       )}
+      <ToastContainer />
     </AppWrapper>
   );
 }

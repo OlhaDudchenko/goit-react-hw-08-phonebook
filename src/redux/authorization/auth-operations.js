@@ -1,5 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com/";
 
@@ -21,6 +24,16 @@ export const register = createAsyncThunk(
 
       return data;
     } catch (error) {
+      toast.error("Something get wrong!Please try again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       return rejectWithValue(error.message);
     }
   }
@@ -34,6 +47,16 @@ export const login = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
+      toast.error("Something get wrong!Please try again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       return rejectWithValue(error.message);
     }
   }
