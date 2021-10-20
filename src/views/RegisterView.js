@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { authOperations } from "../redux/authorization";
+import { useDispatch, useSelector } from "react-redux";
+import { authOperations, authSelectors } from "../redux/authorization";
 import { Section } from "../components/Section";
 import {
   Input,
@@ -10,6 +10,8 @@ import { Form, RegisterViewBack } from "./RegisterView.styled";
 
 export default function RegisterView() {
   const dispatch = useDispatch();
+  const error = useSelector(authSelectors.getError);
+
   const [user, setUser] = useState({ name: "", email: "", password: "" });
   const { name, email, password } = user;
 
@@ -26,45 +28,51 @@ export default function RegisterView() {
   return (
     <RegisterViewBack>
       <Section>
-        <h1>Sign Up</h1>
+        {error ? (
+          <h2>Something get wrong...</h2>
+        ) : (
+          <>
+            <h1>Sign Up</h1>
 
-        <Form onSubmit={handleSubmit} autoComplete="off">
-          <label htmlFor="name">Name</label>
-          <Input
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            onChange={handleChange}
-            required
-            autoComplete="off"
-          />
+            <Form onSubmit={handleSubmit} autoComplete="off">
+              <label htmlFor="name">Name</label>
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={handleChange}
+                required
+                autoComplete="off"
+              />
 
-          <label htmlFor="email">Email</label>
-          <Input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={handleChange}
-            required
-            autoComplete="off"
-          />
+              <label htmlFor="email">Email</label>
+              <Input
+                type="email"
+                name="email"
+                id="email"
+                value={email}
+                onChange={handleChange}
+                required
+                autoComplete="off"
+              />
 
-          <label htmlFor="pass">Password</label>
-          <Input
-            id="pass"
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            autoComplete="off"
-            minLength="7"
-            required
-          />
+              <label htmlFor="pass">Password</label>
+              <Input
+                id="pass"
+                type="password"
+                name="password"
+                value={password}
+                onChange={handleChange}
+                autoComplete="off"
+                minLength="7"
+                required
+              />
 
-          <FormButton type="submit">Sign Up</FormButton>
-        </Form>
+              <FormButton type="submit">Sign Up</FormButton>
+            </Form>
+          </>
+        )}
       </Section>
     </RegisterViewBack>
   );

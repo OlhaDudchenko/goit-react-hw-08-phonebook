@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import logger from "redux-logger";
+import logger from "redux-logger";
 import phonebookReducer from "./phonebook/contacts-reducer";
 import authorizationReducer from "./authorization/auth-reducer";
 import {
@@ -36,6 +36,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    logger,
   ],
   devTools: process.env.NODE_ENV === "development",
 });
